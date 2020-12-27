@@ -10,7 +10,7 @@
 
 
 
-            <div class="card pub_image">
+            <div class="card pub_image pub_image_detail">
                 <div class="card-header">
 
                     @if($image->user->image)
@@ -19,7 +19,7 @@
                     </div>
                     @endif
                     <div class="data-user">
-                        {{ $image->user->name.' '. $image->user->image  }}
+                        {{ $image->user->name }}
                         <span class="nickname">
                             {{' | @'.$image->user->nick}}
                         </span>
@@ -29,7 +29,7 @@
                 <div class="card-body">
 
                     @if($image->user->image)
-                    <div class="image-container">
+                    <div class="image-container image-detail">
                         <img src="{{route('image.file',['filename' => $image->image_path])}}" alt="">
                     </div>
                     @endif
@@ -47,15 +47,57 @@
                     <div class="likes">
                         <img src="{{asset('img/heart-black.png')}}" alt="">
                     </div>
+                    <div class="clearfix"></div>
 
                     <div class="comments">
-                        <a href="" class="btn btn-sm btn-warning btn-comments">
-                            Comentarios ({{count($image->comments)}})
-                        </a>
+                        <h2>Comentarios ({{count($image->comments)}})</h2>
+                        <hr>
+                        <form action="{{route('comment.save')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="image_id" value="{{$image->id}}">
+                            <p>
+                                <textarea class="form-control {{$errors->has('content') ? 'is-invalid' : ''}}"
+                                    name="content"></textarea>
+
+                                @if($errors->has('content'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong> {{$errors->first('content')}}</strong>
+                                </span>
+
+                                @endif
+                            </p>
+
+                            <button class="btn btn-success" type="submit">Enviar</button>
+
+                        </form>
+                        <hr>
+
+                        @foreach($image->comments as $comment)
+                        <div class="comment">
+
+
+                            <span class="nickname">{{'@'.$comment->user->nick}}</span>
+                            <span
+                                class="nickname date">{{ ' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
+
+                            <p>
+                                {{$comment->content}} <br>
+
+
+                                @if(Auth::check() && ($comment->user_id == Auth::user()->id ||
+                                $comment->image->user_id==Auth::user()->id))
+                                <a class="btn btn-sm btn-danger"
+                                    href="{{route('comment.delete',['id' => $comment->id])}}">
+                                    Eliminar
+                                </a>
+
+                                @endif
+                            </p>
+                        </div>
+
+                        @endforeach
+
                     </div>
-
-
-
                 </div>
             </div>
 

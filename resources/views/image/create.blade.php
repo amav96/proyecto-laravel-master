@@ -22,15 +22,15 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label text-md-right" for="image_path">Imagen</label>
                             <div class="col-md-7">
-                                <input type="file" id="image_path" name="image_path" class="form-control" required>
-                                @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                <input type="file" id="image_path" name="image_path"
+                                    class="form-control {{$errors->has('image_path') ? 'is-invalid' : ''}}" required>
+                                @if($errors->has('image_path'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong> {{$errors->first('image_path')}}</strong>
+                                </span>
+
+
+
                                 @endif
                             </div>
 
@@ -46,7 +46,8 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label text-md-right" for="description">Descripcion</label>
                             <div class="col-md-7">
-                                <textarea type="text" id="description" name="description" class="form-control" required>
+                                <textarea type="text" id="description" name="description"
+                                    class="form-control {{$errors->has('content') ? 'is-invalid' : ''}}" required>
                                 </textarea>
                             </div>
                         </div>

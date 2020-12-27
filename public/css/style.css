@@ -45,6 +45,9 @@
     max-height: 400px;
     overflow: hidden;
 }
+.image-detail{
+    max-height: 500px;
+}
 .image-container img{
     width: 100%;
 
@@ -52,6 +55,8 @@
 .pub_image .card-body{
     padding: 0px;
 }
+
+
 
 /* Descripcion de imagge */
 .pub_image .description{
@@ -78,4 +83,10 @@
 
 .likes img {
     width: 30px;
+}
+
+.pub_image_detail .comments{
+
+    padding: 20px;
+
 }
