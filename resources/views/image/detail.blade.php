@@ -5,10 +5,10 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             @include('includes.message')
 
-            @foreach($images as $image)
+
 
             <div class="card pub_image">
                 <div class="card-header">
@@ -19,11 +19,10 @@
                     </div>
                     @endif
                     <div class="data-user">
-                        <a href="{{route('image.detail',['id' => $image->id])}}">
-                            {{ $image->user->name.' '. $image->user->image  }} <span class="nickname">
-                                {{' | @'.$image->user->nick}}
-                            </span>
-                        </a>
+                        {{ $image->user->name.' '. $image->user->image  }}
+                        <span class="nickname">
+                            {{' | @'.$image->user->nick}}
+                        </span>
                     </div>
                 </div>
 
@@ -36,10 +35,9 @@
                     @endif
 
                     <div class="description">
-
-
-                        <span class="nickname">{{'@'.$image->user->nick}} </span>
+                        <span class="nickname">{{'@'.$image->user->nick}}</span>
                         <span class="nickname date">{{ ' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
+
                         <p>
                             {{$image->description}}
                         </p>
@@ -60,12 +58,11 @@
 
                 </div>
             </div>
-            @endforeach
+
 
             {{-- Paginacion --}}
 
-            <div class="clearfix"></div>
-            {{$images->links()}}
+
         </div>
 
 
