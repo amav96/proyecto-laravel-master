@@ -90,3 +90,10 @@
     padding: 20px;
 
 }
+
+/* likes */
+
+.number_likes{
+    color: gray;
+    font-size: 11px;
+}
