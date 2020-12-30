@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\User;
 
 class UserController extends Controller
 {
@@ -59,7 +60,6 @@ class UserController extends Controller
             $image_path_name = time().$image_path->getClientOriginalName();
            //guardar en la carpeta storage(storage/app/users)
             Storage::disk('users')->put($image_path_name, File::get($image_path));
-
             //seteo el nombre de la imagen en el objeto
             $user->image = $image_path_name;
 
@@ -79,4 +79,17 @@ class UserController extends Controller
         $file = Storage::disk('users')->get($filename);
         return new Response ($file,200);
     }
+
+    public function profile($id){
+
+        $user = User::find($id);
+
+        return view('user.profile',[
+            'user' => $user
+        ]);
+        
+
+    }
+
+
 }

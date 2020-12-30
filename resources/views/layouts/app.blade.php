@@ -11,9 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/main.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -58,10 +56,7 @@
                         @endif
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('home')}}">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('likes')}}">Favoritas</a>
+                            <a class="nav-link" href="{{route('likes')}}">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('image.create')}}">Subir imagen</a>
@@ -78,7 +73,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{{route('profile',['id' =>Auth::user()->id])}}">
                                     Mi perfil
                                 </a>
                                 <a class="dropdown-item" href="{{route('config')}}">
